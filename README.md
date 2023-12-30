@@ -1,4 +1,4 @@
-*经测试有些ip访问时会显示下图*
+*After testing, the following figure will be displayed when some ip accesses*
 
 <img src="https://image.3001.net/images/20231116/1700131811_6555f3e30a1efc2db761f.png" height="50%" width="50%" /></a>
 
@@ -20,24 +20,24 @@ https://openai-proxy-api.pages.dev/api
 ```
 ***
 
->  新项目 [基于OpenAI的微信机器人](https://github.com/x-dr/wechat-bot)
+> New project [WeChat robot based on OpenAI] (https://github.com/x-dr/wechat-bot )
 
 ***
 
-### 演示站为公共服务，如有大规模使用需求请自行部署，演示站有点不堪重负
+### The demo station is a public service. If you need to use it on a large scale, please deploy it yourself. The demo station is a bit overwhelmed.
 
 ![worker](./docs/img/worker.png)
 
 
-## 利用Cloudflare Worker中转api.openai.com
+## Use Cloudflare Worker中转api.openai.com
 
-1. 新建一个 Cloudflare Worker
-2. 复制 [cf_worker.js](https://cdn.jsdelivr.net/gh/x-dr/chatgptProxyAPI@main/cf_worker.js)  里的代码粘贴到 Worker 中并部署
-3. 给 Worker 绑定一个没有被墙的域名
-4. 使用自己的域名代替 api.openai.com
+1. Create a new Cloudflare worker
+2. copy [cf_worker.js ](https://cdn.jsdelivr.net/gh/x-dr/chatgptProxyAPI@main/cf_worker.js ) Paste the code in the worker and deploy it
+3. Bind a domain name that is not blocked to the worker
+4. Use your own domain name instead api.openai.com
 
 
-**[详细教程](./docs/cloudflare_workers.md)**
+**[Detailed tutorial] (./docs/cloudflare_workers.md)**
 
 
 
@@ -45,41 +45,41 @@ https://openai-proxy-api.pages.dev/api
 
 
 
-## 使用CloudFlare Pages进行中转
+## Use CloudFlare Pages for transit
 
-### 1、部署中转API+ Openai API余额查询 (使用sess-xxxx的Authorization查询，有效时间未知)
+###1. Deploy transit API + Openai API balance query (use sess-xxxx Authorization query, the effective time is unknown)
 
-> [官方文档](https://developers.cloudflare.com/pages)
+> [Official documentation] (https://developers.cloudflare.com/pages )
 
-1. ~~Fork本项目~~ 点击[Use this template](https://github.com/x-dr/chatgptProxyAPI/generate)按钮创建一个新的代码库。
-2. 登录到[Cloudflare](https://dash.cloudflare.com/)控制台.
-3. 在帐户主页中，选择`pages`> ` Create a project` > `Connect to Git`
-4. 选择你 Fork 的项目存储库，在`Set up builds and deployments`部分中，全部默认即可。
-
-
-5. 点击`Save and Deploy`部署，然后点`Continue to project`即可看到访问域名
+1. ~~Fork this project~~Click [Use this template] (https://github.com/x-dr/chatgptProxyAPI/generate ) The button creates a new code base.
+2. Log in to [Cloudflare] (https://dash.cloudflare.com /) Console.
+3. In the account homepage, select `pages'>'Create a project'>'Connect to Git`
+4. Select the project repository you fork, and in the'set up builds and deployments` section, all defaults.
 
 
-> 把官方接口的`https://api.openai.com`替换为`https://xxx.pages.dev` 即可
+5. Click'save and Deploy'to deploy, and then click 'Continue to project'to see the access domain name
+
+
+> Put the official interface`https://api.openai.com 'Replace with`https://xxx.pages.dev 'That's it
 
 **Demo**
 
 [https://chatai.451024.xyz](https://chatai.451024.xyz)
 
-**[详细教程](./docs/cloudflare_pages.md)**
+**[Detailed tutorial] (./docs/cloudflare_pages.md)**
 
 
-### 2、只部署中转API
+###2. Only deploy the transit API
 
 
-**[详细教程](./docs/cloudflare_proxy_pages.md)**
+**[Detailed tutorial] (./docs/cloudflare_proxy_pages.md)**
 
 
 
 
-## docker 部署（要境外vps） 
+## docker deployment (requires overseas vps) 
 
-> 好像不支持sse 所以不建议
+> It seems that sse is not supported, so it is not recommended
 
 <details>
 
@@ -92,7 +92,7 @@ docker run -itd --name openaiproxy \
            gindex/openaiproxy:latest
 ```
 
-#### 使用
+#### Use
 
 *api : http://vpsip:3000/proxy/v1/chat/completions*
 
@@ -111,12 +111,12 @@ curl --location 'http://vpsip:3000/proxy/v1/chat/completions' \
 
 
 
-## 用法
+## Usage
 
 
 <details>
 
-<summary>JavaScript用fetch</summary>
+<summary>fetch for JavaScript</summary>
 
 ```javascript
 const requestOptions = {
@@ -149,7 +149,7 @@ fetch("https://openai.1rmb.tk/v1/chat/completions", requestOptions)
 
 <details>
 
-<summary>用python</summary>
+<summary> Use python </summary>
 
 ```python
 import requests
@@ -174,13 +174,13 @@ payload = {
 
 try:
     response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status() # 抛出异常，如果响应码不是200
+    response.raise_for_status() # Throws an exception if the response code is not 200
     data = response.json()
     print(data)
 except requests.exceptions.RequestException as e:
-    print(f"请求错误: {e}")
+    print(f"Request error: {e}")
 except json.JSONDecodeError as e:
-    print(f"无效的 JSON 响应: {e}")
+    print(f"invalid JSON response: {e}")
 ```
 
 </details>
@@ -188,7 +188,7 @@ except json.JSONDecodeError as e:
 
 
 <details>
-<summary>用nodejs chatgpt库</summary>
+<summary> Use nodejs chatgpt library </summary>
 
 [transitive-bullshit/chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
 
@@ -218,14 +218,14 @@ example()
 
 <details>
 
-<summary>查询余额</summary>
+<summary>Check balance </summary>
 
 ```javascript
     const headers = {
       'content-type': 'application/json',
       'Authorization': `Bearer sk-xxxxxxxxxxxxxxxxx`
     }
-    // 查是否订阅
+    // Check whether to subscribe
     const subscription = await fetch("https://openai.1rmb.tk/v1/dashboard/billing/subscription", {
       method: 'get',
       headers: headers
@@ -247,7 +247,7 @@ example()
       })
       
       const usageData = await response.json();
-      // 账号类型
+      // Account type
       const plan = subscriptionData.plan.id
       console.log(usageData);
       }
@@ -259,4 +259,3 @@ example()
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=x-dr/chatgptProxyAPI&type=Date)](https://star-history.com/#x-dr/chatgptProxyAPI&Date)
-
